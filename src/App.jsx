@@ -224,11 +224,11 @@ const AboutPage = () => (
           <div className="bg-gray-800 p-8 rounded-lg shadow-xl text-center transform transition-transform duration-300 hover:scale-105">
             <img
               src="https://placehold.co/150x150/555555/ffffff?text=Coach"
-              alt="Coach John Doe"
+              alt="Coach Tim Allen"
               className="rounded-full w-32 h-32 mx-auto mb-6 object-cover"
               onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/150x150/555555/ffffff?text=Coach"; }}
             />
-            <h3 className="text-xl font-semibold text-gray-100 mb-2">John Doe</h3>
+            <h3 className="text-xl font-semibold text-gray-100 mb-2">Tim Allen</h3>
             <p className="text-red-400 font-medium mb-4">Head Coach - 15U Boys</p>
             <p className="text-gray-400 text-sm">
               Coach John brings over 10 years of coaching experience, focusing on defensive strategies and player leadership.
