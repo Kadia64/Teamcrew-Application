@@ -242,7 +242,7 @@ const AboutPage = () => (
               className="rounded-full w-32 h-32 mx-auto mb-6 object-cover"
               onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/150x150/555555/ffffff?text=Coach"; }}
             />
-            <h3 className="text-xl font-semibold text-gray-100 mb-2">Jane Smith</h3>
+            <h3 className="text-xl font-semibold text-gray-100 mb-2">Bobby Knight</h3>
             <p className="text-red-400 font-medium mb-4">Assistant Coach - 13U Girls</p>
             <p className="text-gray-400 text-sm">
               Coach Jane specializes in offensive drills and developing guard skills. She is passionate about youth basketball.
