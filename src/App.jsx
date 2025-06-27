@@ -72,7 +72,7 @@ const HomePage = () => (
     {/* Hero Section */}
     <section className="relative h-screen flex items-center justify-center text-center overflow-hidden">
       {/* Updated background to a more abstract, darker pattern for better text readability */}
-      <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('https://placehold.co/1920x1080/181818/555555?text=Subtle+Basketball+Texture')" }}>
+      <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('https://placehold.co/1920x1080/181818/555555?text=Placeholder+Image')" }}>
         <div className="absolute inset-0 bg-black opacity-75"></div> {/* Increased opacity for even better contrast */}
       </div>
       <div className="relative z-10 p-4 max-w-4xl mx-auto">
