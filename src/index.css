@@ -1,3 +1,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Global font styles */
+@layer base {
+  /* Body text - Roboto */
+  body {
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  /* All headings - Teko */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Teko', sans-serif;
+  }
+  
+  /* Ensure all paragraph and smaller text uses Roboto */
+  p, span, li, a, button, input, textarea, label {
+    font-family: 'Roboto', sans-serif;
+  }
+}
