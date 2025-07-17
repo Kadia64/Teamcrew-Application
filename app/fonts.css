@@ -1,0 +1,31 @@
+/* Web Font Loading - Automatic for all users */
+
+/* Option 1: Using Google Fonts for similar alternatives */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@600;700&family=Montserrat:wght@600;700&family=Raleway:wght@600;700&display=swap');
+
+/* Option 2: If you have the actual font files, place them in /public/fonts/ and use: */
+/*
+@font-face {
+  font-family: 'DIN Neuzeit Grotesk';
+  src: url('/fonts/DINNeuzeitGrotesk-Bold.woff2') format('woff2'),
+       url('/fonts/DINNeuzeitGrotesk-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Lulo Clean';
+  src: url('/fonts/LuloClean-One.woff2') format('woff2'),
+       url('/fonts/LuloClean-One.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+*/
+
+/* Option 3: Using Adobe Fonts (requires Adobe Fonts account) */
+/* Add this to your <head>: <link rel="stylesheet" href="https://use.typekit.net/YOUR_KIT_ID.css"> */
+
+/* Option 4: Using CDN services */
+/* Note: Some fonts may require licenses for web use */
