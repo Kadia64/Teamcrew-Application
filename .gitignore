@@ -1,0 +1,7 @@
+# Production gitignore for deployment branch
+# This excludes large media files that should be hosted externally
+
+# Exclude large video files
+/shooting-drills.mp4
+*.mp4
+*.webm
