@@ -2,10 +2,12 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { Menu, X } from 'lucide-react'
 
 export default function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const pathname = usePathname()
 
   const navLinks = [
     { href: '/', label: 'Home' },
@@ -42,7 +44,7 @@ export default function Navigation() {
                     href="https://renownapparel.com/crew_culture/shop/products/all?page=1"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-gray-300 hover:text-[#d51510] px-3 py-2 text-base font-quicksand font-medium transition-colors duration-300"
+                    className="nav-link text-gray-300 hover:text-[#d51510] px-3 py-2 text-base font-quicksand font-medium transition-colors duration-300"
                   >
                     {link.label}
                   </a>
@@ -50,7 +52,11 @@ export default function Navigation() {
                   <Link
                     key={link.href}
                     href={link.href}
-                    className="text-gray-300 hover:text-[#d51510] px-3 py-2 text-base font-quicksand font-medium transition-colors duration-300"
+                    className={`nav-link px-3 py-2 text-base font-quicksand font-medium transition-colors duration-300 ${
+                      pathname === link.href 
+                        ? 'active' 
+                        : 'text-gray-300 hover:text-[#d51510]'
+                    }`}
                   >
                     {link.label}
                   </Link>
@@ -83,10 +89,10 @@ export default function Navigation() {
               link.external ? (
                 <a
                   key={link.href}
-                  href="https://www.google.com/"
+                  href="https://renownapparel.com/crew_culture/shop/products/all?page=1"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-300 hover:text-[#d51510] block px-3 py-2 text-lg font-quicksand font-medium transition-colors duration-300"
+                  className="nav-link text-gray-300 hover:text-[#d51510] block px-3 py-2 text-lg font-quicksand font-medium transition-colors duration-300"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {link.label}
@@ -95,7 +101,11 @@ export default function Navigation() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="text-gray-300 hover:text-[#d51510] block px-3 py-2 text-lg font-quicksand font-medium transition-colors duration-300"
+                  className={`nav-link block px-3 py-2 text-lg font-quicksand font-medium transition-colors duration-300 ${
+                    pathname === link.href 
+                      ? 'active' 
+                      : 'text-gray-300 hover:text-[#d51510]'
+                  }`}
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {link.label}

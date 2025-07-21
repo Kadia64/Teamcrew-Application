@@ -15,6 +15,9 @@ const geistMono = Geist_Mono({
 export const metadata = {
   title: "Team C.R.E.W. Basketball",
   description: "AAU Basketball Team - Springfield, IL",
+  icons: {
+    icon: '/teamcrew-logo.png',
+  },
 };
 
 export default function RootLayout({ children }) {

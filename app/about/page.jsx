@@ -2,8 +2,53 @@
 
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
+import { useEffect, useRef, useState } from 'react'
+import Footer from '../components/Footer'
+import PageTitle from '../components/PageTitle'
 
 export default function About() {
+  const [visibleCoaches, setVisibleCoaches] = useState(new Set())
+  const [visibleStaff, setVisibleStaff] = useState(new Set())
+  const coachRefs = useRef([])
+  const staffRefs = useRef([])
+
+  useEffect(() => {
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    }
+
+    const coachObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const index = parseInt(entry.target.dataset.index)
+          setVisibleCoaches(prev => new Set(prev).add(index))
+        }
+      })
+    }, observerOptions)
+
+    const staffObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const index = parseInt(entry.target.dataset.index)
+          setVisibleStaff(prev => new Set(prev).add(index))
+        }
+      })
+    }, observerOptions)
+
+    coachRefs.current.forEach((ref) => {
+      if (ref) coachObserver.observe(ref)
+    })
+
+    staffRefs.current.forEach((ref) => {
+      if (ref) staffObserver.observe(ref)
+    })
+
+    return () => {
+      coachObserver.disconnect()
+      staffObserver.disconnect()
+    }
+  }, [])
   // Mock data for coaches
   const headCoach = {
     name: "Tim Allen",
@@ -49,13 +94,14 @@ export default function About() {
 
   return (
     <div className="min-h-screen bg-white">
+      <PageTitle title="About" />
       {/* Header Section */}
       <section className="relative h-96 md:h-[600px] lg:h-[700px] overflow-hidden">
         <div className="absolute inset-0 flex">
           {/* Red Box - Left Side */}
           <div className="w-full md:w-[35%] bg-[#d51510] flex items-center justify-center">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white text-center px-4 font-alumni-sans">
-              Our Coaches & Staff
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white text-center px-8 py-4 font-alumni-sans border-4 border-white leading-relaxed">
+              Our Coaches <br></br> & Staff
             </h1>
           </div>
           {/* Image - Right Side */}
@@ -75,16 +121,16 @@ export default function About() {
           <div className="flex flex-col lg:flex-row items-center gap-12">
             {/* Coach Info - Left Side */}
             <div className="lg:w-1/2 text-center lg:text-left">
-              <div className="flex items-center gap-3 mb-2">
-                <h2 className="text-3xl font-bold text-gray-800 font-alumni-sans">{headCoach.name}</h2>
-                <Link 
-                  href={headCoach.link}
-                  className="inline-flex items-center text-[#d51510] hover:text-[#b51210] transition-colors group"
-                >
-                  <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
-                </Link>
-              </div>
-              <p className="text-xl text-[#d51510] font-semibold mb-6 font-josefin-sans">{headCoach.title}</p>
+              <Link 
+                href={headCoach.link}
+                className="group inline-block"
+              >
+                <div className="flex items-center gap-3 mb-2">
+                  <h2 className="text-3xl font-bold text-gray-800 font-alumni-sans group-hover:text-[#d51510] transition-colors">{headCoach.name}</h2>
+                  <ArrowRight className="w-6 h-6 text-[#d51510] group-hover:translate-x-1 transition-transform" />
+                </div>
+                <p className="text-xl text-[#d51510] font-semibold mb-6 font-josefin-sans">{headCoach.title}</p>
+              </Link>
               <p className="text-gray-600 mb-6 leading-relaxed font-josefin-sans">{headCoach.bio}</p>
             </div>
             {/* Coach Image - Right Side */}
@@ -111,7 +157,16 @@ export default function About() {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {basketballCoaches.map((coach, index) => (
-              <div key={index} className="text-center relative">
+              <div 
+                key={index} 
+                ref={el => coachRefs.current[index] = el}
+                data-index={index}
+                className={`text-center relative transition-all duration-700 ${
+                  visibleCoaches.has(index) 
+                    ? 'opacity-100 translate-y-0' 
+                    : 'opacity-0 translate-y-10'
+                }`}
+              >
                 <div className="aspect-w-3 aspect-h-4 mb-4 overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
                   <img 
                     src={coach.image}
@@ -138,7 +193,16 @@ export default function About() {
           </h2>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {staff.map((member, index) => (
-              <div key={index} className="flex gap-4 bg-white rounded-lg overflow-hidden shadow-md">
+              <div 
+                key={index} 
+                ref={el => staffRefs.current[index] = el}
+                data-index={index}
+                className={`flex gap-4 bg-white rounded-lg overflow-hidden shadow-md transition-all duration-700 ${
+                  visibleStaff.has(index) 
+                    ? 'opacity-100 translate-y-0' 
+                    : 'opacity-0 translate-y-10'
+                }`}
+              >
                 <div className="w-1/3 flex-shrink-0">
                   <div className="aspect-w-3 aspect-h-4 h-full">
                     <img 
@@ -162,66 +226,7 @@ export default function About() {
         </div>
       </section>
 
-      {/* Footer Links Section */}
-      <footer className="bg-[#1f1f1f] text-white py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            {/* Team C.R.E.W. Column */}
-            <div>
-              <h3 className="text-xl font-bold mb-4 font-din-neuzeit text-[#d51510]">Team C.R.E.W.</h3>
-              <ul className="space-y-2">
-                <li><Link href="/" className="text-gray-400 hover:text-[#d51510] transition-colors font-quicksand">Home</Link></li>
-                <li><Link href="/merch" className="text-gray-400 hover:text-[#d51510] transition-colors font-quicksand">Shop</Link></li>
-                <li><Link href="/about" className="text-gray-400 hover:text-[#d51510] transition-colors font-quicksand">About</Link></li>
-                <li><Link href="/contact" className="text-gray-400 hover:text-[#d51510] transition-colors font-quicksand">Contact</Link></li>
-              </ul>
-            </div>
-
-            {/* Leadership Column */}
-            <div>
-              <h3 className="text-xl font-bold mb-4 font-din-neuzeit text-[#d51510]">Leadership</h3>
-              <ul className="space-y-2">
-                <li><Link href="/faq" className="text-gray-400 hover:text-[#d51510] transition-colors font-quicksand">FAQ</Link></li>
-                <li><Link href="/shipping-returns" className="text-gray-400 hover:text-[#d51510] transition-colors font-quicksand">Shipping & Returns</Link></li>
-                <li><Link href="/store-policy" className="text-gray-400 hover:text-[#d51510] transition-colors font-quicksand">Store Policy</Link></li>
-                <li><Link href="/payment-methods" className="text-gray-400 hover:text-[#d51510] transition-colors font-quicksand">Payment Methods</Link></li>
-              </ul>
-            </div>
-
-            {/* Follow Us Column */}
-            <div>
-              <h3 className="text-xl font-bold mb-4 font-din-neuzeit text-[#d51510]">Follow Us</h3>
-              <ul className="space-y-2">
-                <li>
-                  <a 
-                    href="https://facebook.com" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="text-gray-400 hover:text-[#d51510] transition-colors font-quicksand"
-                  >
-                    Facebook
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            {/* Newsletter Column */}
-            <div>
-              <h3 className="text-xl font-bold mb-4 font-din-neuzeit text-[#d51510]">Join Our Newsletter</h3>
-              <p className="text-gray-400 text-sm">
-                Stay updated with Team C.R.E.W. news and events.
-              </p>
-            </div>
-          </div>
-
-          {/* Copyright */}
-          <div className="mt-12 pt-8 border-t border-gray-700 text-center">
-            <p className="text-gray-400 text-sm">
-              © 2024 Team C.R.E.W. All rights reserved.
-            </p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   )
 }

@@ -3,6 +3,8 @@
 import Link from 'next/link'
 import { Calendar, MapPin, ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
+import Footer from './components/Footer'
+import PageTitle from './components/PageTitle'
 
 export default function Home() {
   const imageRef = useRef(null)
@@ -109,6 +111,7 @@ export default function Home() {
 
   return (
     <div className="bg-white">
+      <PageTitle title="Home" />
       {/* Hero Section with Background Image */}
       <section className="relative bg-[#d51510] min-h-screen">
         {/* Background Image - Left Aligned */}
@@ -126,34 +129,34 @@ export default function Home() {
         <div className="absolute inset-0 z-10 flex items-center">
           <div className="ml-8 md:ml-16 lg:ml-24">
             <div className="space-y-4 mb-8">
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-[#1f1f1f] font-permanent-marker" style={{ WebkitTextStroke: '1px white', textStroke: '1px white', fontWeight: '900' }}>
+              <h2 className="text-5xl md:text-6xl lg:text-7xl font-extrabold text-[#1f1f1f] font-permanent-marker" style={{ WebkitTextStroke: '1px white', textStroke: '1px white', fontWeight: '900' }}>
                 <span className="relative">
                   C
                   <span className="absolute bottom-1 left-0 w-full h-1 bg-[#1f1f1f]" style={{ boxShadow: '0 0 0 1px white' }}></span>
                 </span>hosen
               </h2>
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-[#1f1f1f] font-permanent-marker" style={{ WebkitTextStroke: '1px white', textStroke: '1px white', fontWeight: '900' }}>
+              <h2 className="text-5xl md:text-6xl lg:text-7xl font-extrabold text-[#1f1f1f] font-permanent-marker" style={{ WebkitTextStroke: '1px white', textStroke: '1px white', fontWeight: '900' }}>
                 <span className="relative">
                   R
                   <span className="absolute bottom-1 left-0 w-full h-1 bg-[#1f1f1f]" style={{ boxShadow: '0 0 0 1px white' }}></span>
                 </span>eady
               </h2>
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-[#1f1f1f] font-permanent-marker" style={{ WebkitTextStroke: '1px white', textStroke: '1px white', fontWeight: '900' }}>
+              <h2 className="text-5xl md:text-6xl lg:text-7xl font-extrabold text-[#1f1f1f] font-permanent-marker" style={{ WebkitTextStroke: '1px white', textStroke: '1px white', fontWeight: '900' }}>
                 <span className="relative">
                   E
                   <span className="absolute bottom-1 left-0 w-full h-1 bg-[#1f1f1f]" style={{ boxShadow: '0 0 0 1px white' }}></span>
                 </span>quipped
               </h2>
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-[#1f1f1f] font-permanent-marker" style={{ WebkitTextStroke: '1px white', textStroke: '1px white', fontWeight: '900' }}>
+              <h2 className="text-5xl md:text-6xl lg:text-7xl font-extrabold text-[#1f1f1f] font-permanent-marker" style={{ WebkitTextStroke: '1px white', textStroke: '1px white', fontWeight: '900' }}>
                 <span className="relative">
                   W
                   <span className="absolute bottom-1 left-0 w-full h-1 bg-[#1f1f1f]" style={{ boxShadow: '0 0 0 1px white' }}></span>
                 </span>illing
               </h2>
             </div>
-            <button className="bg-white hover:bg-gray-100 text-[#d51510] font-bold py-3 px-8 rounded-lg transition duration-200 transform hover:scale-105">
+            <Link href="/register" className="inline-block bg-white hover:bg-gray-100 text-[#d51510] font-bold py-4 px-12 rounded-lg transition duration-200 transform hover:scale-105 text-lg mt-6">
               Register Now
-            </button>
+            </Link>
           </div>
         </div>
       </section>
@@ -187,7 +190,7 @@ export default function Home() {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Player Development Panel */}
-            <Link href="/player-development" className="group relative overflow-hidden rounded-t-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
+            <Link href="/register" className="group relative overflow-hidden rounded-t-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
               <div className="relative h-[400px] md:h-[500px] lg:h-[600px]">
                 <img 
                   src="/basketball-player-1.jpg" 
@@ -290,9 +293,10 @@ export default function Home() {
         </div>
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-4xl md:text-5xl font-bold text-center text-gray-800 mb-12 font-alumni-sans underline">
-            Upcoming Tournaments
+            {events.length > 0 ? 'Upcoming Tournaments' : 'No Events Available at This Time'}
           </h2>
           
+          {events.length > 0 ? (
           <div className="relative">
             {/* Navigation Buttons */}
             {events.length > 3 && (
@@ -374,69 +378,11 @@ export default function Home() {
               </div>
             </div>
           </div>
+          ) : null}
         </div>
       </section>
 
-      {/* Footer Links Section */}
-      <footer className="bg-[#1f1f1f] text-white py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            {/* Team C.R.E.W. Column */}
-            <div>
-              <h3 className="text-xl font-bold mb-4 font-din-neuzeit text-[#d51510]">Team C.R.E.W.</h3>
-              <ul className="space-y-2">
-                <li><Link href="/" className="text-gray-400 hover:text-[#d51510] transition-colors font-quicksand">Home</Link></li>
-                <li><Link href="/merch" className="text-gray-400 hover:text-[#d51510] transition-colors font-quicksand">Shop</Link></li>
-                <li><Link href="/about" className="text-gray-400 hover:text-[#d51510] transition-colors font-quicksand">About</Link></li>
-                <li><Link href="/contact" className="text-gray-400 hover:text-[#d51510] transition-colors font-quicksand">Contact</Link></li>
-              </ul>
-            </div>
-
-            {/* Leadership Column */}
-            <div>
-              <h3 className="text-xl font-bold mb-4 font-din-neuzeit text-[#d51510]">Leadership</h3>
-              <ul className="space-y-2">
-                <li><Link href="/faq" className="text-gray-400 hover:text-[#d51510] transition-colors font-quicksand">FAQ</Link></li>
-                <li><Link href="/shipping-returns" className="text-gray-400 hover:text-[#d51510] transition-colors font-quicksand">Shipping & Returns</Link></li>
-                <li><Link href="/store-policy" className="text-gray-400 hover:text-[#d51510] transition-colors font-quicksand">Store Policy</Link></li>
-                <li><Link href="/payment-methods" className="text-gray-400 hover:text-[#d51510] transition-colors font-quicksand">Payment Methods</Link></li>
-              </ul>
-            </div>
-
-            {/* Follow Us Column */}
-            <div>
-              <h3 className="text-xl font-bold mb-4 font-din-neuzeit text-[#d51510]">Follow Us</h3>
-              <ul className="space-y-2">
-                <li>
-                  <a 
-                    href="https://facebook.com" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="text-gray-400 hover:text-[#d51510] transition-colors font-quicksand"
-                  >
-                    Facebook
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            {/* Newsletter Column */}
-            <div>
-              <h3 className="text-xl font-bold mb-4 font-din-neuzeit text-[#d51510]">Join Our Newsletter</h3>
-              <p className="text-gray-400 text-sm">
-                Stay updated with Team C.R.E.W. news and events.
-              </p>
-            </div>
-          </div>
-
-          {/* Copyright */}
-          <div className="mt-12 pt-8 border-t border-gray-700 text-center">
-            <p className="text-gray-400 text-sm">
-              © 2024 Team C.R.E.W. All rights reserved.
-            </p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   )
 }
