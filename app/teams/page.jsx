@@ -3,16 +3,11 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import PageTitle from '../components/PageTitle'
+import { teams } from '../data/data'
 
 export default function Teams() {
   const [selectedTeam, setSelectedTeam] = useState(null)
 
-  // Mock data for teams
-  const teams = [
-    { id: 1, name: 'U12 Boys', coach: 'Coach Smith', players: 12 },
-    { id: 2, name: 'U14 Boys', coach: 'Coach Johnson', players: 15 },
-    { id: 3, name: 'U16 Boys', coach: 'Coach Williams', players: 14 },
-  ]
 
   const Footer = () => (
     <footer className="bg-[#1f1f1f] text-white py-16">

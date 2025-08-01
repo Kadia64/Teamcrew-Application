@@ -4,43 +4,9 @@ import Link from 'next/link'
 import { Calendar, MapPin } from 'lucide-react'
 import Footer from '../components/Footer'
 import PageTitle from '../components/PageTitle'
+import { events } from '../data/data'
 
 export default function Events() {
-  // Mock data for events
-  const events = [
-    {
-      id: 1,
-      name: "Indiana Clash",
-      date: "April 5-6, 2025",
-      location: "Misheawaka, IN",
-      image: "/events/indiana-clash.jpg",
-      description: "Annual spring tournament featuring top teams from the region"
-    },
-    {
-      id: 2,
-      name: "Midwest Warmup",
-      date: "April 18-19, 2024",
-      location: "Bedford Park, IL",
-      image: "/events/midwest-warmup.jpg",
-      description: "Elite showcase tournament with college scouts in attendance"
-    },
-    {
-      id: 3,
-      name: "Dome Debut Classic",
-      date: "March 28-29, 2026",
-      location: "Scheels Legacy Sports Complex / University of Illinois Springfield",
-      image: "/events/dome-debut-classic.png",
-      description: "Premier summer tournament with teams from across the country"
-    },
-    {
-      id: 4,
-      name: "Made Nationals",
-      date: "August 2-3, 2025",
-      location: "Manheim, PA",
-      image: "/events/made-nationals.jpg",
-      description: "National Championship"
-    }
-  ]
 
   return (
     <div className="min-h-screen bg-white flex flex-col">

@@ -4,16 +4,9 @@ import Link from 'next/link'
 import { ArrowLeft, Phone, Mail } from 'lucide-react'
 import Footer from '../../components/Footer'
 import PageTitle from '../../components/PageTitle'
+import { headCoach } from '../../data/data'
 
 export default function HeadCoachPage() {
-  const headCoach = {
-    name: "Tim Allen",
-    title: "Owner / Head Coach",
-    image: "/staff/tim-allen.jpg",
-    phone: "(217) 220-0395",
-    email: "tsjallen3@gmail.com",
-    bio: "Coach Allen has coached for nearly 20 years. He began coaching at Flo Valley College and later moved on to Robert Morris University where he was an assistant coach. He coached at Grant middle school for 6 years where he won multiple state championships. He is currently the head coach of Sacred Heart Griffin Boys Varsity Basketball Team, where he has over 19 championships. His greatest accomplishment is making it to the final 4 in 2020 and winning a state championship in 2022. Coach Allen has been named IBCA coach of the year 6 times. He has been married for 15 years and has two children. He is most proud of his relationship with Christ."
-  }
 
   return (
     <div className="min-h-screen bg-white">
