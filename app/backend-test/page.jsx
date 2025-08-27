@@ -18,7 +18,8 @@ export default function BackendTestPage() {
     is_featured: false
   });
 
-  const API_URL = 'https://phpstack-1512757-5811248.cloudwaysapps.com/api';
+  const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://phpstack-1512757-5811248.cloudwaysapps.com/api';
+  const API_TOKEN = process.env.NEXT_PUBLIC_API_TOKEN || 'TEAMCREW_2025_xKm9pL4nQ8vR3sT6wY7zB2aF5jH1dE0c';
 
   // Test API Connection
   const testConnection = async () => {
@@ -37,7 +38,11 @@ export default function BackendTestPage() {
   const fetchProducts = async () => {
     setLoading(true);
     try {
-      const response = await fetch(`${API_URL}/products`);
+      const response = await fetch(`${API_URL}/products`, {
+        headers: {
+          'X-API-Token': API_TOKEN
+        }
+      });
       if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
       const data = await response.json();
       setProducts(data);
@@ -58,6 +63,7 @@ export default function BackendTestPage() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'X-API-Token': API_TOKEN
         },
         body: JSON.stringify({
           ...formData,
@@ -95,7 +101,10 @@ export default function BackendTestPage() {
     
     try {
       const response = await fetch(`${API_URL}/products/${id}`, {
-        method: 'DELETE'
+        method: 'DELETE',
+        headers: {
+          'X-API-Token': API_TOKEN
+        }
       });
 
       if (!response.ok) throw new Error('Failed to delete product');
