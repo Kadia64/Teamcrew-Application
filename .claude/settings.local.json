@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//mnt/c/xampp/htdocs/react-backend/bootstrap/**)",
+      "Read(//mnt/c/Users/wesgl/OneDrive/Desktop/Hellopayments/HP-Website/hp-website/src/**)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
